@@ -1,6 +1,6 @@
 import React from 'react'
 import Button from '../Button'
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 const isSearched = searchTerm => item => item.title.toLowerCase().includes(searchTerm.toLowerCase());
 
@@ -36,7 +36,7 @@ const Table = ({ list, pattern, onDismiss }) =>
         )}
     </div>
 
-Table.propTypes = {
+/*Table.propTypes = {
     list: PropTypes.array.isRequired,
     /** more declarative
      * list: PropTypes.arrayOf(
@@ -49,7 +49,7 @@ Table.propTypes = {
             })
         ).isRequired
      */
-    onDismiss: PropTypes.func.isRequired
-};
+    //onDismiss: PropTypes.func.isRequired
+//};
 
 export default Table;
