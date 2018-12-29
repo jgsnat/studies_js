@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import Button from './components/Button';
+import ButtonWithLoading from './components/Button/ButtonWithLoading';
 import axios from 'axios';
 
 /**
@@ -8,7 +8,6 @@ import axios from 'axios';
  */
 import Search from './components/Search';
 import Table from  './components/Table';
-import Loading from './components/Loading';
 
 import {
   DEFAULT_QUERY,
@@ -133,12 +132,11 @@ class App extends Component {
             />
         }
         <div className="interactions">
-          { isLoading
-            ? <Loading />
-            : <Button onClick={() => this.fetchSearchTopStories(searchKey, page + 1)}>
-              More
-            </Button>
-          }
+          <ButtonWithLoading 
+            isLoading={isLoading}
+            onClick={() => this.fetchSearchTopStories(searchKey, page + 1)}>
+            More
+          </ButtonWithLoading>
         </div>
       </div>
     );
