@@ -6,8 +6,8 @@ import axios from 'axios';
 /**
  * Components
  */
-import Search from './components/Search';
-import Table from  './components/Table';
+import Search from './components/Search/Search';
+import Table from  './components/Table/Table';
 
 import {
   DEFAULT_QUERY,
