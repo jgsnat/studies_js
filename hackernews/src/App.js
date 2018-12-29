@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
-import Button from './components/Button/Button';
+import Button from './components/Button';
 import axios from 'axios';
 
 /**
  * Components
  */
-import Search from './components/Search/Search';
-import Table from  './components/Table/Table';
+import Search from './components/Search';
+import Table from  './components/Table';
 
 import {
   DEFAULT_QUERY,
