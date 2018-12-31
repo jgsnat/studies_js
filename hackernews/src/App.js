@@ -18,7 +18,6 @@ import {
   PARAM_PAGE,
   PARAM_HPP,
 } from './utils/index';
-import { timingSafeEqual } from 'crypto';
 
 class App extends Component {
 
