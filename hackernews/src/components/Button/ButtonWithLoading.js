@@ -1,5 +1,5 @@
-import withLoading from '../withLoading'
-import Button from './'
+import withLoading from '../Loading/withLoading';
+import Button from './';
 
 const ButtonWithLoading = withLoading(Button);
 

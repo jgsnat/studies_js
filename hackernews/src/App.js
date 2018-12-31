@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
-import ButtonWithLoading from './components/Button/ButtonWithLoading';
 import axios from 'axios';
 
 /**
  * Components
  */
 import Search from './components/Search';
-import Table from  './components/Table';
+import ButtonWithLoading from './components/Button/ButtonWithLoading';
+import TableWithError from './components/Table/TableWithError';
 
 import {
   DEFAULT_QUERY,
@@ -18,6 +18,7 @@ import {
   PARAM_PAGE,
   PARAM_HPP,
 } from './utils/index';
+import { timingSafeEqual } from 'crypto';
 
 class App extends Component {
 
@@ -31,7 +32,9 @@ class App extends Component {
       searchKey: '',
       searchTerm: DEFAULT_QUERY,
       error: null,
-      isLoading: false
+      isLoading: false,
+      sortKey: 'NONE',
+      isSortReverse: false
     };
 
     /**
@@ -43,6 +46,7 @@ class App extends Component {
     this.setSearchTopStories = this.setSearchTopStories.bind(this);
     this.onSearchChange = this.onSearchChange.bind(this);
     this.onDismiss = this.onDismiss.bind(this);
+    this.onSort = this.onSort.bind(this);
   }
 
   needsToSearchTopStories(searchTerm) {
@@ -105,8 +109,13 @@ class App extends Component {
     });
   }
 
+  onSort(sortKey) {
+    const isSortReverse = this.state.sortKey === sortKey && !this.state.isSortReverse;
+    this.setState({ sortKey, isSortReverse });
+  }
+
   render() {
-    const { searchTerm, results, searchKey, error, isLoading } = this.state;
+    const { searchTerm, results, searchKey, error, isLoading, sortKey, isSortReverse } = this.state;
     const page = (results && results[searchKey] && results[searchKey].page) || 0;
     const list = (results && results[searchKey] && results[searchKey].hits) || [];
 
@@ -121,16 +130,14 @@ class App extends Component {
             Search
           </Search>
         </div>
-        { error 
-          ? <div className="interactions">
-            <p>Something went wrong.</p>
-          </div>
-          : <Table 
-              list={list}
-              pattern={searchTerm}
-              onDismiss={this.onDismiss}
-            />
-        }
+        <TableWithError 
+          error={error}
+          list={list}
+          sortKey={sortKey}
+          isSortReverse={isSortReverse}
+          onSort={this.onSort}
+          onDismiss={this.onDismiss}
+        />
         <div className="interactions">
           <ButtonWithLoading 
             isLoading={isLoading}
